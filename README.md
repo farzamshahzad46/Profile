@@ -3,7 +3,7 @@
 Personal portfolio site for an AI/ML engineer, built with React and TypeScript, featuring a 3D
 skill-network visualisation and an AI assistant that answers questions about my background.
 
-**Live site:** https://farzam-shahzad.vercel.app
+**Live site:** farzamshahzad.vercel.app
 
 ---
 

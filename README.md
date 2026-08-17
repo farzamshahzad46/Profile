@@ -1,65 +1,91 @@
-# My Portfolio Website - Overview 🚀
+# Farzam Shahzad — Portfolio
 
-This repository contains the open-source version of my personal portfolio website.  
-Feel free to explore the code and use it for learning and inspiration.
+Personal portfolio site for an AI/ML engineer, built with React and TypeScript, featuring a 3D
+skill-network visualisation and an AI assistant that answers questions about my background.
 
----
-
-## ⚠️ Usage Notice
-
-This project is shared for learning purposes only.
-
-Please do NOT:
-- Clone or replicate the full website or design
-- Repost it with minor content changes
-- Use this project for commercial/client work
-- Create tutorials or content using this exact project
-
-If you use parts of the code, you must provide proper credit linking back to the original repository.
-
-Build your own version — don’t just copy.
-
-— Moncy Yohannan
+**Live site:** https://farzam-shahzad.vercel.app
 
 ---
 
-## 🛠️ Instructions
+## Tech Stack
 
-I have modified the GSAP Club plugins using trial versions.  
-⚠️ Note: Trial plugins cannot be used for production or hosting.
-
-For official GSAP Club plugins, refer here:  
-https://gsap.com/docs/v3/Installation/
-
----
-
-## ⚙️ Tech Stack
-
-React • TypeScript • GSAP • Three.js • WebGL • HTML • CSS • JavaScript
+**Frontend:** React 18 • TypeScript • Vite • GSAP (ScrollSmoother, ScrollTrigger, SplitText)
+**3D / Graphics:** Three.js • React Three Fiber • WebGL • Draco compression
+**AI Assistant:** Google Gemini API via a Vercel serverless function
+**Deployment:** Vercel
 
 ---
 
-## 🎨 Assets Usage
+## Features
 
-Some 3D assets included in this repository are free to use for learning purposes.
-
-However:
-
-- The original 3D avatar used on my live portfolio is NOT included in this repository
-- That avatar is a custom asset created over ~1 month
-- It is not open source and not available for reuse
-
-Any usage, extraction, or redistribution of that avatar from my live website is strictly prohibited.
+- 3D animated character on the landing section, driven by cursor position
+- Interactive skill network — 36 skills rendered as nodes on a brain-shaped point cloud,
+  grouped into five filterable categories
+- Scroll-driven section animations and smooth scrolling via GSAP
+- Built-in AI assistant that answers visitor questions about my skills, projects, and experience,
+  grounded in a profile context rather than open-ended generation
+- Fully responsive, with a dedicated mobile navigation menu
 
 ---
 
-![Protfolio-Preview](https://github.com/user-attachments/assets/3c4557e7-6392-4928-b8a9-7b2476ef4edd)
+## Running Locally
+
+```bash
+npm install
+npm run dev
+```
+
+The AI assistant requires a serverless runtime, so it will not respond under `npm run dev`.
+To test it locally, use the Vercel CLI instead:
+
+```bash
+npm i -g vercel
+vercel dev
+```
+
+### Environment Variables
+
+| Variable | Purpose |
+| --- | --- |
+| `GEMINI_API_KEY` | Google Gemini API key, used server-side by `api/chat.ts` |
+
+Set this in your Vercel project settings (or a local `.env` for `vercel dev`). It is never exposed
+to the client — all model calls go through the serverless function.
 
 ---
 
-## 📄 License
+## Project Structure
 
-This project is licensed under the Personal Portfolio License (PPL) v1.0.
+```
+api/                      Vercel serverless functions (AI assistant endpoint)
+public/
+  models/                 3D character model, HDR environment map
+  draco/                  Draco decoder for compressed geometry
+  images/                 Static image assets
+src/
+  components/             Section components (Landing, About, Work, TechStack, Contact, ...)
+    Character/            3D avatar scene, loading and animation logic
+    styles/               Per-component stylesheets
+    utils/                Shared GSAP scroll and text-splitting helpers
+  context/                Global loading state
+  data/                   Static data (skeleton bone mappings)
+```
 
-See the LICENSE file for full details
+---
 
+## Credits
+
+The original design and front-end structure of this site is based on the open-source portfolio
+template by **Moncy Yohannan** (github.com/MoncyDev), used with credit. The colour system,
+typography, navigation, skill-network visualisation, project content, and AI assistant are my own
+additions and modifications.
+
+See the LICENSE file for the original template's license terms.
+
+---
+
+## Contact
+
+**Email:** FarzamShahzad27@gmail.com
+**GitHub:** github.com/farzamshahzad46
+**LinkedIn:** linkedin.com/in/farzam-shahzad-568024283

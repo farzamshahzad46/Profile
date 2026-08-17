@@ -3,12 +3,12 @@
 // GEMINI_API_KEY in your Vercel project's Environment Variables (Settings ->
 // Environment Variables), not in any file that ships to the client.
 //
-// Model choice: gemini-2.5-flash-lite has the most generous free-tier quota
-// as of mid-2026 (15 requests/min, 1000/day). Swap the MODEL constant below
-// if you hit limits or want a different model - check
-// https://ai.google.dev/gemini-api/docs/pricing for current free-tier rows,
-// since Google changes these fairly often.
-const MODEL = "gemini-2.5-flash-lite";
+// Model choice: flash-lite carries the most generous free-tier quota.
+// Google retires model names fairly often - if this starts returning a 404
+// saying the model is no longer available, the error message itself names the
+// replacement to use. Current free-tier rows are listed at
+// https://ai.google.dev/gemini-api/docs/pricing
+const MODEL = "gemini-3.5-flash-lite";
 
 // Edit this to keep it accurate as your projects/skills change - the
 // assistant only knows what's written here, it doesn't read the rest of
@@ -93,15 +93,15 @@ export default async function handler(req: any, res: any) {
   const trimmedMessage = message.slice(0, 1000);
   const safeHistory: ChatMessage[] = Array.isArray(history)
     ? history
-        .filter(
-          (m): m is ChatMessage =>
-            m &&
-            (m.role === "user" || m.role === "model") &&
-            Array.isArray(m.parts) &&
-            typeof m.parts[0]?.text === "string"
-        )
-        .slice(-10)
-        .map((m) => ({ role: m.role, parts: [{ text: m.parts[0].text.slice(0, 1000) }] }))
+      .filter(
+        (m): m is ChatMessage =>
+          m &&
+          (m.role === "user" || m.role === "model") &&
+          Array.isArray(m.parts) &&
+          typeof m.parts[0]?.text === "string"
+      )
+      .slice(-10)
+      .map((m) => ({ role: m.role, parts: [{ text: m.parts[0].text.slice(0, 1000) }] }))
     : [];
 
   try {

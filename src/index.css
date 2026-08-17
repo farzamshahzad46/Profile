@@ -156,5 +156,13 @@ body {
 @media screen and (max-width: 900px) {
   .techstack h2 {
     font-size: 40px;
+    top: 70px;
+  }
+
+  /* The negative bottom margin is a desktop-only overlap trick; on mobile it
+     pulls the Contact section up over the skill-category pills. */
+  .techstack {
+    margin-bottom: 40px;
+    margin-top: 20px;
   }
 }
